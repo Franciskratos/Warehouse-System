@@ -6,8 +6,10 @@ function LoginPage({onLogin}){
 
     const [userEmail, setUserEmail] = useState("");
     const [userPsw, setUserPsw] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const email = "francisco@test.com";
     const password = "test123";
+    
 
     const Login = () => {
         if (userPsw == password && userEmail == email){
@@ -20,15 +22,21 @@ function LoginPage({onLogin}){
         }
     }
 
+    const handleShowPasswordChange = () => {
+        setShowPassword(!showPassword);
+      };
+
     return(<>
         <div className="login-form">
             <p className="login-word">Login</p>
             <div className="email-div">
                 <input type="email" placeholder="Email" value={userEmail} onChange={(e) => setUserEmail (e.target.value)}></input>
-                <input type="password" placeholder="Password" value={userPsw} onChange={(e) => setUserPsw (e.target.value)}></input>
+                <input  type={showPassword ? "text" : "password"} placeholder="Password" value={userPsw} onChange={(e) => setUserPsw (e.target.value)}></input>
                 <div className="checkbox-container">
-            <input type="checkbox" id="show-password" />
+                <input type="checkbox" id="show-password" checked={showPassword} onChange={handleShowPasswordChange} 
+            />
             <label htmlFor="show-password" className="show-password">Show password</label>
+
             
         </div>
         <button onClick={Login}>Sign in</button>
